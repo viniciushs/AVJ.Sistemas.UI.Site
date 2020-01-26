@@ -1,0 +1,10 @@
+<div fxLayout="column">
+    <app-default-table 
+        [columns]="tableColumns" 
+        [rows]="tableRows"
+        [isLoading]="isLoading"
+        [cardTitle]="'nomeFantasia'"
+        (onEditClick)="edit($event)"
+        (onDeleteClick)="delete($event)">
+    </app-default-table>
+</div>

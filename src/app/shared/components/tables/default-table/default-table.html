@@ -1,0 +1,94 @@
+<div fxLayout="column" fxLayoutGap="10px">
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between center"
+        fxLayoutAlign.lt-md="center stretch">
+        <div fxLayout="row" fxFlex="100%" fxLayoutAlign="end center">
+            <button *ngIf="!cardMode" mat-raised-button color="primary" (click)="cardMode = false;">
+                <mat-icon>grid_on</mat-icon>
+            </button>
+            <button *ngIf="cardMode" mat-raised-button (click)="cardMode = false;">
+                <mat-icon>grid_on</mat-icon>
+            </button>
+
+            <button *ngIf="cardMode" mat-raised-button color="primary" (click)="cardMode = true;">
+                <mat-icon>flip_to_front</mat-icon>
+            </button>
+            <button *ngIf="!cardMode" mat-raised-button (click)="cardMode = true;">
+                <mat-icon>flip_to_front</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div *ngIf="!cardMode" fxLayout="row">
+        <table mat-table [dataSource]="rows" class="mat-elevation-z8">
+
+            <ng-container *ngFor="let column of columns" matColumnDef="{{column.definition}}">
+                <th mat-header-cell *matHeaderCellDef> {{column.label}} </th>
+                <td mat-cell *matCellDef="let element"> {{column.displayFn(element)}} </td>
+            </ng-container>
+
+            <ng-container cdkColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Ações </th>
+                <td mat-cell *matCellDef="let element" fxLayoutGap="5px">
+                    <button *ngIf="hasEditButton" mat-mini-fab color="primary" (click)="editClickAction(element)">
+                        <i class="material-icons">
+                            edit
+                        </i>
+                    </button>
+
+                    <button *ngIf="hasDeleteButton" mat-mini-fab color="warn" (click)="deleteClickAction(element)">
+                        <i class="material-icons">
+                            delete
+                        </i>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+
+    <div *ngIf="cardMode" fxLayout="row wrap" fxLayoutAlign="space-around center">
+        <mat-card *ngFor="let row of rows" fxFlex.lt-xs="100%" fxFlex.lt-sm="100%" fxFlex.lt-md="40%" fxFlex.lt-lg="30%"
+            fxFlex.lt-xl="20%" fxFlex.xl="20%">
+            <mat-card-title *ngIf="cardTitle" class="text-center">
+                {{row[cardTitle]}}
+            </mat-card-title>
+
+            <mat-divider></mat-divider>
+
+            <mat-card-content>
+                <table class="mat-table-card">
+                    <tbody>
+                        <tr *ngFor="let column of columns">
+                            <td class="mat-table-card-header-cell">
+                                {{column.label}}
+                            </td>
+                            <td class="mat-table-card-value-cell">
+                                {{column.displayFn(row)}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </mat-card-content>
+
+            <mat-divider></mat-divider>
+
+            <mat-card-actions *ngIf="hasActions">
+                <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                    <button *ngIf="hasDeleteButton" mat-mini-fab color="warn" (click)="deleteClickAction(row)">
+                        <i class="material-icons">
+                            delete
+                        </i>
+                    </button>
+
+                    <button *ngIf="hasEditButton" mat-mini-fab color="primary" (click)="editClickAction(row)">
+                        <i class="material-icons">
+                            edit
+                        </i>
+                    </button>
+                </div>
+
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
