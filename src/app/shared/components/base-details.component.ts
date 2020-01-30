@@ -22,6 +22,7 @@ export abstract class BaseDetailsComponent extends BaseComponent implements OnIn
     }
 
     public ngOnInit() {
+        debugger;
         super.ngOnInit();
 
         this.form = this.createFormGroup();
@@ -47,8 +48,8 @@ export abstract class BaseDetailsComponent extends BaseComponent implements OnIn
 
             this.apiService.obter(this.id)
                 .subscribe((item: any) => {
-                    this.model = item;
-                    // this.form.patchValue(this.model);
+                    this.model = item.dados;
+                    this.form.patchValue(this.model);
                     this.afterLoad();
                 });
         } else {
@@ -59,6 +60,8 @@ export abstract class BaseDetailsComponent extends BaseComponent implements OnIn
     public load() {
         super.load();
 
+        debugger;
+
         this.apiService
             .obter(this.id)
             .subscribe((response: any) => {
@@ -67,7 +70,6 @@ export abstract class BaseDetailsComponent extends BaseComponent implements OnIn
     }
 
     public submit() {
-        debugger;
         this.model = this.form.value;
 
         let request$ = this.apiService.incluir(this.model);

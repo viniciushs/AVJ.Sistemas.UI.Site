@@ -24,7 +24,7 @@ export class CargoDetailsComponent extends BaseDetailsComponent {
 
   public createFormGroup(): FormGroup {
     return this.formBuilder.group({
-      idCargo: [{value: null, disabled: true}],
+      idCargo: [0],
       descricaoCargo: [null, [Validators.required, Validators.maxLength(128)]]
     });
   }

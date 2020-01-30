@@ -1,8 +1,6 @@
 <div fxLayout="column" fxFlex fxLayoutGap="20px">
     <div fxLayout="column" fxFlex fxLayoutGap="20px" [formGroup]="form">
-        <mat-form-field *ngIf="isEditMode">
-            <input matInput formControlName="idCargo" placeholder="Identificador">
-        </mat-form-field>
+        
         <mat-form-field>
             <input matInput required formControlName="descricaoCargo" placeholder="Descrição">
             <mat-hint align="end">
