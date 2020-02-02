@@ -23,15 +23,15 @@ export class FranqueadoDetailsComponent extends BaseDetailsComponent implements 
     public formBuilder: FormBuilder) {
     super(router, activatedRoute, apiService, formBuilder);
 
-    this.baseUrl = 'cargo';
+    this.baseUrl = 'franqueado';
   }
 
   public createFormGroup(): FormGroup {
     return this.formBuilder.group({
       idFranqueado: [0],
-      descricaoFranqueado: [null, [Validators.required, Validators.maxLength(128)]],
-      // nomeFantasia: [null, [Validators.maxLength(128)]],
-      // cnpj: [null, [Validators.maxLength(14)]],
+      descricaoFranqueado: [null, [Validators.required, Validators.maxLength(70)]],
+      nomeFantasia: [null],
+      cnpj: [null],
       cpf: [null, [Validators.required, Validators.maxLength(11)]],
       dataCancelamento: [null],
       dataCadastro: [new Date()],
@@ -54,7 +54,6 @@ export class FranqueadoDetailsComponent extends BaseDetailsComponent implements 
   }
 
   public submit() {
-    debugger;
     this.model = this.form.value;
     this.model.idSituacao = +this.model.idSituacao;
 

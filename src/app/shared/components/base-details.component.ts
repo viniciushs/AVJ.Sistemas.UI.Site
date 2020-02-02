@@ -18,11 +18,10 @@ export abstract class BaseDetailsComponent extends BaseComponent implements OnIn
         public apiService: BaseService,
         public formBuilder: FormBuilder,
         public dialog?: MatDialog) {
-        super(router, dialog);
+        super(router, activatedRoute, dialog);
     }
 
     public ngOnInit() {
-        debugger;
         super.ngOnInit();
 
         this.form = this.createFormGroup();
@@ -48,6 +47,7 @@ export abstract class BaseDetailsComponent extends BaseComponent implements OnIn
 
             this.apiService.obter(this.id)
                 .subscribe((item: any) => {
+                    debugger;
                     this.model = item.dados;
                     this.form.patchValue(this.model);
                     this.afterLoad();
@@ -59,8 +59,6 @@ export abstract class BaseDetailsComponent extends BaseComponent implements OnIn
 
     public load() {
         super.load();
-
-        debugger;
 
         this.apiService
             .obter(this.id)

@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 
 import { MenuItems } from './menu-items/menu-items';
 import { AccordionAnchorDirective, AccordionLinkDirective, AccordionDirective } from './accordion';
-import { DefaultTableComponent } from './components/tables/default-table/default-table.component';
 import { TablesModule } from './components/tables/tables.module';
+import { BreadcumbModule } from './components/breadcumb/breadcumb.module';
 
 
 @NgModule({
@@ -16,6 +16,8 @@ import { TablesModule } from './components/tables/tables.module';
     AccordionAnchorDirective,
     AccordionLinkDirective,
     AccordionDirective,
+
+    BreadcumbModule,
     TablesModule
   ],
   providers: [

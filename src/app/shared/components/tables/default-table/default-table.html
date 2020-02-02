@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutGap="10px">
+<div fxLayout="column" fxLayoutGap="10px" fxShow fxHide.lt-sm>
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between center"
         fxLayoutAlign.lt-md="center stretch">
         <div fxLayout="row" fxFlex="100%" fxLayoutAlign="end center">
@@ -48,6 +48,54 @@
     </div>
 
     <div *ngIf="cardMode" fxLayout="row wrap" fxLayoutAlign="space-around center">
+        <mat-card *ngFor="let row of rows" fxFlex.lt-xs="100%" fxFlex.lt-sm="100%" fxFlex.lt-md="40%" fxFlex.lt-lg="30%"
+            fxFlex.lt-xl="20%" fxFlex.xl="20%">
+            <mat-card-title *ngIf="cardTitle" class="text-center">
+                {{row[cardTitle]}}
+            </mat-card-title>
+
+            <mat-divider></mat-divider>
+
+            <mat-card-content>
+                <table class="mat-table-card">
+                    <tbody>
+                        <tr *ngFor="let column of columns">
+                            <td class="mat-table-card-header-cell">
+                                {{column.label}}
+                            </td>
+                            <td class="mat-table-card-value-cell">
+                                {{column.displayFn(row)}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </mat-card-content>
+
+            <mat-divider></mat-divider>
+
+            <mat-card-actions *ngIf="hasActions">
+                <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                    <button *ngIf="hasDeleteButton" mat-mini-fab color="warn" (click)="deleteClickAction(row)">
+                        <i class="material-icons">
+                            delete
+                        </i>
+                    </button>
+
+                    <button *ngIf="hasEditButton" mat-mini-fab color="primary" (click)="editClickAction(row)">
+                        <i class="material-icons">
+                            edit
+                        </i>
+                    </button>
+                </div>
+
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+
+<!-- Mobile apresenta apenas cards, não apresenta a opçao de grid -->
+<div fxLayout="column" fxLayoutGap="10px" fxShow.lt-sm fxHide>
+    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
         <mat-card *ngFor="let row of rows" fxFlex.lt-xs="100%" fxFlex.lt-sm="100%" fxFlex.lt-md="40%" fxFlex.lt-lg="30%"
             fxFlex.lt-xl="20%" fxFlex.xl="20%">
             <mat-card-title *ngIf="cardTitle" class="text-center">

@@ -1,5 +1,5 @@
 import { OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { BaseComponent } from './base.component';
 import { BaseService } from '../services/base.service';
@@ -25,10 +25,11 @@ export abstract class BaseListComponent extends BaseComponent implements OnInit,
 
     constructor(
         public router: Router,
+        public activatedRoute: ActivatedRoute,
         public apiService: BaseService,
         public broadcastService: BroadcastService,
         public dialog?: MatDialog) {
-        super(router, dialog);
+        super(router, activatedRoute, dialog);
     }
 
     public ngOnInit() {

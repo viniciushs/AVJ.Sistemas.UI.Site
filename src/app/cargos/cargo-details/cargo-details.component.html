@@ -1,4 +1,6 @@
 <div fxLayout="column" fxFlex fxLayoutGap="20px">
+    <app-breadcumb [breadcumb]="breadcumb" (onItemClick)="goToBreadcumbItem($event)"></app-breadcumb>
+
     <div fxLayout="column" fxFlex fxLayoutGap="20px" [formGroup]="form">
         
         <mat-form-field>
@@ -22,10 +24,10 @@
             <mat-icon>arrow_back</mat-icon>
             Voltar
         </button>
-        <button mat-raised-button color="success" [disabled]="!form.valid" (click)="submit($event)" >
-            <span *ngIf="!isEditMode">Criar</span>
-            <span *ngIf="isEditMode">Atualizar</span>
+        <button mat-raised-button color="success" [disabled]="!form.valid" (click)="submit($event)">
             <mat-icon>save</mat-icon>
+            <span *ngIf="!isEditMode" class="m-l-5">Salvar</span>
+            <span *ngIf="isEditMode"  class="m-l-5">Atualizar</span>
         </button>
 
         <!-- <button mat-button (click)="back($event)">Voltar</button> -->

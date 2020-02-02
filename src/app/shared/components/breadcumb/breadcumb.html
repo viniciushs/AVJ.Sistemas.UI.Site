@@ -1,0 +1,5 @@
+<div *ngIf="breadcumb" fxLayout="row" fxLayoutGap="10px">
+    <button *ngFor="let item of breadcumb.items; let i = index" mat-button (click)="itemClickAction(item)">
+        {{item.title}}
+    </button>
+</div>

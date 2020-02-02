@@ -1,11 +1,15 @@
 import { OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { Subscription } from 'rxjs';
+import { Breadcumb } from '../models/breadcumb.model';
+import { BreadcumbItem } from '../models/breadcumb-item.model';
 
 export abstract class BaseComponent implements OnInit, OnDestroy {
 
     protected baseUrl: string;
+
+    public breadcumb: Breadcumb;
 
     protected queryString = '';
     public isLoading = false;
@@ -15,11 +19,15 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 
     constructor(
         public router: Router,
+        public activatedRoute: ActivatedRoute,
         public dialog?: MatDialog) {
+        const breadcumbItems = this.activatedRoute.snapshot.data.breadcumb;
+
+        this.breadcumb = new Breadcumb(breadcumbItems);
     }
 
     public ngOnInit() {
-        
+
     }
 
     public ngOnDestroy(): void {
@@ -40,8 +48,18 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
         });
     }
 
+    public goToBreadcumbItem(item: BreadcumbItem) {
+        if (item.route) {
+            this.router.navigateByUrl(item.route);
+        }
+    }
+
     public copy(source: any) {
         return JSON.parse(JSON.stringify(source));
+    }
+
+    public simpleComparer(o1: any, o2: any): boolean {
+        return o1 == o2;
     }
 
     public redirect(url: string, target?: string) {

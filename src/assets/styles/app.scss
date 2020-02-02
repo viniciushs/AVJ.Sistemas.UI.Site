@@ -865,6 +865,7 @@ list inline
 }
 
 button.mat-success {
-    background-color: #21AE5E;
+    background-color: $success;
+    color: $white;
   }
 

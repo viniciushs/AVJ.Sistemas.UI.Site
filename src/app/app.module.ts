@@ -1,11 +1,7 @@
 
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { AppRoutes, AppRoutingModule } from './app.routing';
+import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -18,6 +14,14 @@ import { SharedModule } from './shared/shared.module';
 import { SpinnerComponent } from './shared/spinner.component';
 import { MaterialModule } from './material-module';
 import { BroadcastService } from './shared/services/broadcast.service';
+import { NgxMaskModule } from 'ngx-mask';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorModule } from './shared/interceptors/interceptor.module';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
+import { AlertService } from './shared/services/alert.service';
 
 @NgModule({
   declarations: [
@@ -29,21 +33,28 @@ import { BroadcastService } from './shared/services/broadcast.service';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
     FlexLayoutModule,
-    HttpClientModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxMaskModule.forRoot(),
+    ToastrModule.forRoot({
+      maxOpened: 1,
+      autoDismiss: true
+    }),
+    InterceptorModule
   ],
   providers: [
+    AlertService,
     BroadcastService,
     {
-      provide: LocationStrategy,
-      useClass: PathLocationStrategy
+      provide: LOCALE_ID,
+      useValue: 'pt'
     }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

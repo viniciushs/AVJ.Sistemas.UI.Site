@@ -1,4 +1,5 @@
 <div fxLayout="column">
+    <app-breadcumb [breadcumb]="breadcumb" (onItemClick)="goToBreadcumbItem($event)"></app-breadcumb>
     <app-default-table 
         [columns]="tableColumns" 
         [rows]="tableRows"

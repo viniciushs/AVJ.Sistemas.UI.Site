@@ -5,14 +5,43 @@ import { FranqueadoListComponent } from './franqueado-list/franqueado-list.compo
 export const FranqueadosRoutes: Routes = [
   {
     path: '',
-    component: FranqueadoListComponent
+    component: FranqueadoListComponent,
+    data: {
+      breadcumb: [
+        {
+          title: 'Franqueados'
+        }
+      ]
+    }
   },
   {
     path: 'create',
-    component: FranqueadoDetailsComponent
+    component: FranqueadoDetailsComponent,
+    data: {
+      breadcumb: [
+        {
+          title: 'Franqueados',
+          route: 'franqueado'
+        },
+        {
+          title: 'Novo Franqueado'
+        }
+      ]
+    }
   },
   {
     path: 'edit/:id',
-    component: FranqueadoDetailsComponent
+    component: FranqueadoDetailsComponent,
+    data: {
+      breadcumb: [
+        {
+          title: 'Franqueados',
+          route: 'franqueado'
+        },
+        {
+          title: 'Edição de Franqueado'
+        }
+      ]
+    }
   }
 ];

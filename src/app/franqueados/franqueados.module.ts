@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FranqueadosRoutes } from './franqueados.routing';
@@ -22,7 +23,8 @@ import { SituacaoService } from '../shared/services/situacao.service';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
+    NgxMaskModule
   ],
   providers: [
     SituacaoService,

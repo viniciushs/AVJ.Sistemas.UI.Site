@@ -1,10 +1,12 @@
 <div fxLayout="column" fxFlex fxLayoutGap="20px">
+    <app-breadcumb [breadcumb]="breadcumb" (onItemClick)="goToBreadcumbItem($event)"></app-breadcumb>
+
     <div fxLayout="column" fxFlex fxLayoutGap="20px" [formGroup]="form">
 
         <mat-form-field>
             <input matInput required formControlName="descricaoFranqueado" placeholder="Descrição">
             <mat-hint align="end">
-                {{form.get('descricaoFranqueado').value?.length || 0}}/128
+                {{form.get('descricaoFranqueado').value?.length || 0}}/70
             </mat-hint>
 
             <mat-error *ngIf="form.get('descricaoFranqueado').errors &&
@@ -13,12 +15,12 @@
             </mat-error>
             <mat-error *ngIf="form.get('descricaoFranqueado').errors &&
                           form.get('descricaoFranqueado').errors.maxlength">
-                Tamanho máximo da Descrição é de 128 caracteres.
+                Tamanho máximo da Descrição é de 70 caracteres.
             </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput required formControlName="cpf" placeholder="CPF">
+            <input matInput required mask="000.000.000-00" formControlName="cpf" placeholder="CPF">
             <mat-hint align="end">
                 {{form.get('cpf').value?.length || 0}}/11
             </mat-hint>
@@ -35,7 +37,9 @@
 
         <mat-form-field>
             <mat-label>Situação</mat-label>
-            <mat-select required formControlName="idSituacao">
+            <mat-select required 
+                [compareWith]="simpleComparer"
+                formControlName="idSituacao">
                 <mat-option>-- Selecione --</mat-option>
                 <mat-option *ngFor="let situacao of situacoes" value="{{situacao.idSituacao}}">
                     {{situacao.descricaoSituacao}}</mat-option>

@@ -10,7 +10,7 @@ export const AppRoutes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/cargo',
+        redirectTo: 'cargo',
         pathMatch: 'full'
       },
       {

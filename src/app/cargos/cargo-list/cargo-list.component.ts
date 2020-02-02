@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseListComponent } from '../../shared/components/base-list.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CargoService } from '../../shared/services/cargo.service';
 import { Cargo } from '../../shared/models/cargo.model';
 import { TableColumn } from '../../shared/models/table-column.model';
@@ -21,10 +21,15 @@ export class CargoListComponent extends BaseListComponent implements OnInit {
 
   constructor(
     public router: Router,
+    public activatedRoute: ActivatedRoute,
     public apiService: CargoService,
     public broadcastService: BroadcastService,
     public dialog: MatDialog) {
-    super(router, apiService, broadcastService);
+    super(router, activatedRoute, apiService, broadcastService);
+
+    debugger;
+
+    console.log(this.breadcumb);
 
     this.baseUrl = 'cargo';
 

@@ -32,7 +32,6 @@ export class AppHeaderComponent implements OnInit {
   }
 
   private verifyUrl(url: string): void {
-    debugger;
     if (!(url.includes('create') || url.includes('edit'))) {
       const rota = this.menuItems.getMenuitem().find(x => url.includes(x.state));
       if (rota) {

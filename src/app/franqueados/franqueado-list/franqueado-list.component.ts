@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseListComponent } from '../../shared/components/base-list.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TableColumn } from '../../shared/models/table-column.model';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material';
@@ -21,10 +21,11 @@ export class FranqueadoListComponent extends BaseListComponent implements OnInit
 
   constructor(
     public router: Router,
+    public activatedRoute: ActivatedRoute,
     public apiService: FranqueadoService,
     public broadcastService: BroadcastService,
     public dialog: MatDialog) {
-    super(router, apiService, broadcastService);
+    super(router, activatedRoute, apiService, broadcastService);
 
     this.baseUrl = 'franqueado';
 
@@ -49,7 +50,7 @@ export class FranqueadoListComponent extends BaseListComponent implements OnInit
     this.router.navigate([`${this.baseUrl}/edit`, model.idFranqueado]);
   }
 
-  public delete(model: any) {
+  public delete(model: Franqueado) {
     Swal.fire({
       title: 'Excluir?',
       text: 'Você deseja excluir esse registro?',
@@ -58,7 +59,7 @@ export class FranqueadoListComponent extends BaseListComponent implements OnInit
       cancelButtonText: 'Não, mantenha-o!'
     }).then((result) => {
       if (result.value) {
-        this.apiService.excluir(model.idCargo)
+        this.apiService.excluir(model.idFranqueado)
           .subscribe((response: any) => {
             this.load();
 
@@ -66,8 +67,6 @@ export class FranqueadoListComponent extends BaseListComponent implements OnInit
               title: 'Excluído!',
               text: 'O registro foi excluido com sucesso.'
             });
-          }, (err) => {
-            //Seu erro aqui
           });
       } else {
         Swal.fire({
