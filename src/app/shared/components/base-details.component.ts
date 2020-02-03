@@ -47,7 +47,6 @@ export abstract class BaseDetailsComponent extends BaseComponent implements OnIn
 
             this.apiService.obter(this.id)
                 .subscribe((item: any) => {
-                    debugger;
                     this.model = item.dados;
                     this.form.patchValue(this.model);
                     this.afterLoad();

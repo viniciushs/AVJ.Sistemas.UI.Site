@@ -3,9 +3,11 @@
     <app-default-table 
         [columns]="tableColumns" 
         [rows]="tableRows"
+        [pagination]="pagination"
         [isLoading]="isLoading"
         [cardTitle]="'descricaoCargo'"
         (onEditClick)="edit($event)"
-        (onDeleteClick)="delete($event)">
+        (onDeleteClick)="delete($event)"
+        (onChangePage)="changePage($event)">
     </app-default-table>
 </div>

@@ -19,8 +19,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorModule } from './shared/interceptors/interceptor.module';
-import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
-import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 import { AlertService } from './shared/services/alert.service';
 
 @NgModule({

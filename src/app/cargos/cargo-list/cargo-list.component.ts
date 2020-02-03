@@ -27,8 +27,6 @@ export class CargoListComponent extends BaseListComponent implements OnInit {
     public dialog: MatDialog) {
     super(router, activatedRoute, apiService, broadcastService);
 
-    debugger;
-
     console.log(this.breadcumb);
 
     this.baseUrl = 'cargo';

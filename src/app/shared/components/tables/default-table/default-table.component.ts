@@ -1,5 +1,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { TableColumn } from '../../../models/table-column.model';
+import { Pagination } from '../../../models/pagination.model';
+import { PageEvent } from '@angular/material';
 
 @Component({
     selector: 'app-default-table',
@@ -40,6 +42,8 @@ export class DefaultTableComponent {
     }
 
     @Input() rows: any = [];
+    @Input() pagination: Pagination;
+
     @Input() cardTitle: string;
     @Input() isLoading = false;
 
@@ -49,6 +53,7 @@ export class DefaultTableComponent {
     @Input() hasEditButton = true;
     @Input() hasDeleteButton = true;
     @Input() hasSearchButton = true;
+    @Input() hasPagination = true;
 
     @Output() onCreateClick: EventEmitter<any> = new EventEmitter();
     @Output() onEditClick: EventEmitter<any> = new EventEmitter();
@@ -56,6 +61,16 @@ export class DefaultTableComponent {
     @Output() onSearchClick: EventEmitter<any> = new EventEmitter();
 
     @Output() onSearchChange: EventEmitter<any> = new EventEmitter();
+
+    public currentPage: number;
+    public numberPagesToDisplay: number;
+
+    public pages: number[];
+    public allPages: number[];
+
+    public totalPages: number;
+    public totalColumns: number;
+    @Output() onChangePage: EventEmitter<any> = new EventEmitter();
 
     public searchText: string;
 
@@ -70,5 +85,10 @@ export class DefaultTableComponent {
 
     public deleteClickAction(item: any): void {
         this.onDeleteClick.emit(item);
+    }
+
+    public goToPageNumber(pageEvent: PageEvent) {
+        this.currentPage = pageEvent.pageIndex + 1;
+        this.onChangePage.emit(this.currentPage);
     }
 }

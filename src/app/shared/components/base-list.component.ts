@@ -10,10 +10,11 @@ import { BaseSearch } from '../models/base-search.model';
 import { BroadcastService } from '../services/broadcast.service';
 import { BroadcastEnum } from '../enums/broadcast.enum';
 import { BroadcastData } from '../models/broadcast-data.model';
+import { Pagination } from '../models/pagination.model';
 
 export abstract class BaseListComponent extends BaseComponent implements OnInit, OnDestroy {
 
-    protected pagination: any;
+    protected pagination: Pagination = new Pagination();
 
     public tableColumns: TableColumn[] = [];
     public tableRows: any[];
@@ -61,11 +62,24 @@ export abstract class BaseListComponent extends BaseComponent implements OnInit,
             .pesquisar(this.queryString)
             .subscribe((response: any) => {
                 this.tableRows = response.collection;
+
+                const pagination = response.pagination;
+                if (pagination) {
+                    this.pagination = new Pagination(
+                        pagination.PageSize,
+                        pagination.totalResults,
+                        pagination.totalPages,
+                        pagination.page
+                    );
+                }
+
                 this.afterLoad();
             });
     }
 
     public loadQueryString(): void {
+        this.addQueryString('pageSize', 10);
+
         if (this.searchModel.id) {
             this.addQueryString('id', this.searchModel.id);
         }
@@ -113,5 +127,10 @@ export abstract class BaseListComponent extends BaseComponent implements OnInit,
                 });
             }
         });
+    }
+
+    public changePage(page: number) {
+        this.addQueryString('page', page);
+        this.load();
     }
 }
