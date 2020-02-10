@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'https://localhost:44347/api/'
+  apiEndpoint: 'https://localhost:44347/api/',
+  tokenAuthStorage: 'avj-sistemas-token.dev'
 };

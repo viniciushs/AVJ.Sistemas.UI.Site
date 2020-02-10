@@ -1,0 +1,51 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>AVJ Sistemas</mat-card-title>
+            <mat-card-subtitle>Login</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div fxLayout="column" fxFlex fxLayoutGap="20px" [formGroup]="form">
+
+                <mat-form-field>
+                    <input matInput required formControlName="descricaoFuncionario" placeholder="Usuário">
+                    <mat-hint align="end">
+                        {{form.get('descricaoFuncionario').value?.length || 0}}/128
+                    </mat-hint>
+
+                    <mat-error *ngIf="form.get('descricaoFuncionario').errors &&
+                                  form.get('descricaoFuncionario').errors.required">
+                        Usuário obrigatório.
+                    </mat-error>
+                    <mat-error *ngIf="form.get('descricaoFuncionario').errors &&
+                                  form.get('descricaoFuncionario').errors.maxlength">
+                        Tamanho máximo da usuário é de 128 caracteres.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput required formControlName="senha" placeholder="Senha">
+                    <mat-hint align="end">
+                        {{form.get('senha').value?.length || 0}}/128
+                    </mat-hint>
+
+                    <mat-error *ngIf="form.get('senha').errors &&
+                                  form.get('senha').errors.required">
+                        Senha obrigatória.
+                    </mat-error>
+                    <mat-error *ngIf="form.get('senha').errors &&
+                                  form.get('senha').errors.maxlength">
+                        Tamanho máximo da senha é de 128 caracteres.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+                <button mat-raised-button color="success" [disabled]="!form.valid" (click)="submit($event)">
+                    Login
+                </button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</div>

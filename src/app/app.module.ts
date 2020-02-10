@@ -17,13 +17,18 @@ import { BroadcastService } from './shared/services/broadcast.service';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { InterceptorModule } from './shared/interceptors/interceptor.module';
 import { AlertService } from './shared/services/alert.service';
+import { SessionService } from './shared/services/session.service';
+import { StorageService } from './shared/services/storage.service';
+import { TokenService } from './shared/services/token.service';
+import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AuthLayoutComponent,
     FullComponent,
     AppHeaderComponent,
     SpinnerComponent,
@@ -48,6 +53,10 @@ import { AlertService } from './shared/services/alert.service';
   providers: [
     AlertService,
     BroadcastService,
+    SessionService,
+    StorageService,
+    TokenService,
+    // AuthService,
     {
       provide: LOCALE_ID,
       useValue: 'pt'
