@@ -1,11 +1,15 @@
-<div fxLayout="column" fxLayoutAlign="center center">
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>AVJ Sistemas</mat-card-title>
-            <mat-card-subtitle>Login</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <div fxLayout="column" fxFlex fxLayoutGap="20px" [formGroup]="form">
+<div id="login" class="flex-center" fxLayout="column">
+    <div id="login-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+        <div id="login-form">
+
+            <div class="logo">
+                <img class="img-fluid" src="assets/images/logos/logo.jpeg">
+            </div>
+
+            <div class="title">ACESSE A SUA CONTA</div>
+
+
+            <form name="loginForm" [formGroup]="form" novalidate>
 
                 <mat-form-field>
                     <input matInput required formControlName="descricaoFuncionario" placeholder="Usuário">
@@ -38,14 +42,17 @@
                         Tamanho máximo da senha é de 128 caracteres.
                     </mat-error>
                 </mat-form-field>
-            </div>
-        </mat-card-content>
-        <mat-card-actions>
-            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
-                <button mat-raised-button color="success" [disabled]="!form.valid" (click)="submit($event)">
-                    Login
+
+                <button mat-raised-button color="primary" class="submit-button" aria-label="Acessar"
+                    [disabled]="form.invalid" (click)="submit($event)">
+                    Acessar
+                    <mat-icon class="m-l-10" *ngIf="!loading">chevron_right</mat-icon>
+                    <mat-icon class="m-l-10" *ngIf="loading">
+                        <mat-spinner diameter="20">
+                        </mat-spinner>
+                    </mat-icon>
                 </button>
-            </div>
-        </mat-card-actions>
-    </mat-card>
+            </form>
+        </div>
+    </div>
 </div>

@@ -13,6 +13,7 @@ export class AuthComponent implements OnInit {
 
   public form: FormGroup;
   public model: any;
+  public loading: boolean;
 
   constructor(
     public router: Router,
@@ -35,6 +36,10 @@ export class AuthComponent implements OnInit {
   public submit() {
     this.model = this.form.value;
 
+    this.loading = true;
+
+    debugger;
+
     this.apiService
       .login(this.model)
       .subscribe((response: any) => {
@@ -42,6 +47,10 @@ export class AuthComponent implements OnInit {
         this.tokenService.setLoggedToken(token);
 
         this.router.navigateByUrl('cargo');
+      }, (err) => {
+        this.loading = false;
+      }, () => {
+        this.loading = false;
       });
   }
 

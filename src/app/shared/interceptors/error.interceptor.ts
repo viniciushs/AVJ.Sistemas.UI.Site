@@ -20,14 +20,6 @@ export class ErrorInterceptor implements HttpInterceptor {
 
         return next.handle(request)
             .pipe(
-                // tap(data => {
-                //     if (data instanceof HttpResponse) {
-                //         if (data.body && data.body.error) {
-                //             this.alertService.error(data.body.error);
-                //             throw new Error(data.body.error);
-                //         }
-                //     }
-                // }),
                 catchError(err => {
                     switch (err.status) {
 
